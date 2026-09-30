@@ -1,11 +1,18 @@
-// On s'assure que la liste des réactions pour la soude fondue existe
-if (!elements.molten_lye.reactions) {
-    elements.molten_lye.reactions = {};
-}
+runAfterLoad(function() {
+    // On s'assure que la soude fondue existe bien dans le jeu
+    if (elements.molten_lye) {
+        
+        // Si la liste des réactions n'existe pas, on la crée
+        if (!elements.molten_lye.reactions) {
+            elements.molten_lye.reactions = {};
+        }
 
-// Ajout de la réaction d'électrolyse exacte (génère du sodium fondu)
-elements.molten_lye.reactions.electric = {
-    elem1: "molten_sodium",          // Produit directement la version liquide chaude
-    elem2: ["oxygen", "steam"],      // L'électricité se transforme en oxygène et vapeur
-    chance: 0.25
-};
+        // On applique l'électrolyse avec l'élément "electric"
+        elements.molten_lye.reactions.electric = {
+            elem1: "molten_sodium",     // Devient du sodium fondu (liquide chaud)
+            elem2: ["oxygen", "steam"], // L'électricité dégage de l'oxygène et de la vapeur
+            chance: 0.25
+        };
+        
+    }
+});
